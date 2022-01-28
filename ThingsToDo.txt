@@ -1,0 +1,19 @@
+Hello Team,
+
+I created this file to help keep track of what still needs to be worked on.
+
+
+Things to do
+=================
+-Write a divide-and-conquer sorting algorithm in ClosestPair.java 
+--Must run in theta(n log n) time
+--Collin is now working on this. I'm going to implement mergesort as it runs in theta(n log n)
+
+
+-Write the efficientClosestPair algorithm in ClosestPair.java
+--should run in theta(n log n) time
+--pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"
+
+-Write the bruteClosestPair algorithm in ClosestPair.java
+--should run in theta(n^2) time
+--pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"
