@@ -45,8 +45,16 @@ public class ClosestPair {
 
 
 		/* use your sort method here */
+    //sort points based on X value
+    sort(points, true);
+    ArrayList<Point> sortedPointsX = points;
+    //System.out.println(sortedPointsX);
 
-    ArrayList<Point> sortedPointsX = sort(points, true);
+    //sort points based on Y value
+    sort(points, false);
+    ArrayList<Point> sortedPointsY = points;
+    System.out.println(sortedPointsY);
+
     //ArrayList<Point> sortedPointsY = sort(points, false);
 
     //System.out.println("Finished sorting points");
@@ -82,15 +90,92 @@ public class ClosestPair {
 	}
 	
 	
+
+
+  /*
+	 * Write what it does
+	 * 
+	 * @return Write what it returns 
+	 */
 	public static ArrayList<Point> sort(ArrayList<Point> points, boolean sortX) {
 		
 		/* No call to sort method here.  Implement something that is divide-
 		 *  -and-conquer and O(n log n) */
-    
-		
-		return null;
+
+    //create havles of array
+    ArrayList<Point> left = new ArrayList<Point>();
+    ArrayList<Point> right = new ArrayList<Point>();
+    int mid;
+
+    if (points.size() > 1){
+
+      mid = points.size() / 2;
+
+      //populate halves
+      for(int i = 0; i < mid; i++){
+        left.add(points.get(i));
+      }
+      for(int j = mid; j < points.size(); j++){
+        right.add(points.get(j));
+      }
+
+      sort(left, sortX);
+      sort(right, sortX);
+      merge(points, left, right, sortX);
+    }
+
+    return null;
 	}
 	
-	
-	
+	public static void merge(ArrayList<Point> points, ArrayList<Point> left, ArrayList<Point> right, boolean sortX){
+    
+    ArrayList<Point> mergedList = new ArrayList<Point>();
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while((i < left.size()) && (j < right.size())){
+      
+      //sort based on X
+      if (sortX){
+        if(left.get(i).x < right.get(j).x){
+          points.set(k, left.get(i));
+          i++;
+        }
+        else{
+          points.set(k, right.get(j));
+          j++;
+        }
+      }
+      //sort based on Y
+      else{
+        if(left.get(i).y < right.get(j).y){
+          points.set(k, left.get(i));
+          i++;
+        }
+        else{
+          points.set(k, right.get(j));
+          j++;
+        }
+      }
+
+      k++;
+    }
+
+    int t = 0;
+    if (i >= left.size()){
+      mergedList = right;
+      t = j;
+    }
+    else {
+      mergedList = left;
+      t = i;
+    }
+    
+    for (int h = t; h < mergedList.size(); h++){
+      points.set(k, mergedList.get(h));
+      h++;
+    }
+  }
 }

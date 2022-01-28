@@ -3,11 +3,16 @@ Hello Team,
 I created this file to help keep track of what still needs to be worked on.
 
 
+Things that are done
+=======================
+-Read in points from points.txt
+-Sorting algorithm
+
+
+
 Things to do
-=================
--Write a divide-and-conquer sorting algorithm in ClosestPair.java 
---Must run in theta(n log n) time
---Collin is now working on this. I'm going to implement mergesort as it runs in theta(n log n)
+=======================
+-Add better comments to sorting methods (Collin will do this)
 
 
 -Write the efficientClosestPair algorithm in ClosestPair.java
@@ -17,3 +22,6 @@ Things to do
 -Write the bruteClosestPair algorithm in ClosestPair.java
 --should run in theta(n^2) time
 --pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"
+--Rasi is working on this 
+
+-Make sure everything is properly commented according to the JavaDoc sheet on blackboard
