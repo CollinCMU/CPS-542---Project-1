@@ -57,8 +57,8 @@ public class ClosestPair {
 
 
 		// call efficientClosestPair
-    //PointPair closestPair = efficientClosestPair(sortedPointsX, sortedPointsY);
-    //System.out.println(closestPair);
+    PointPair closestPair = efficientClosestPair(sortedPointsX, sortedPointsY);
+    System.out.println(closestPair);
 
 	}
 
@@ -96,9 +96,35 @@ public class ClosestPair {
         smallest = right;
       }
 
+      double minDist = smallest.distBetweenPoints();
+      double minDistSqr = Math.pow(minDist, 2);
       double midX = pointsXOrdered.get(halfSize - 1).x;
 
-      ArrayList<Point> S = new ArrayList<Point>();      
+      ArrayList<Point> S = new ArrayList<Point>();     
+
+      for(int i = 0; i < size; i++){
+        if(Math.abs(pointsYOrdered.get(i).x - midX) < smallest.distBetweenPoints()){
+          S.add(pointsYOrdered.get(i));
+        }
+      }  
+
+
+      for(int i = 0; i < S.size() - 2; i++){
+        int k = i + 1;
+
+        while(k <= S.size() - 1 && (S.get(k).y - S.get(i).y) < minDistSqr){
+          PointPair points = new PointPair(S.get(k), S.get(i));
+          //minDistSqr = Math.min(points.distBetweenPoints(), minDistSqr);
+
+          if(points.distBetweenPoints() < minDistSqr){
+            minDistSqr = points.distBetweenPoints();
+            smallest = points;
+          }
+
+          k++;
+        }
+
+      }
       
 		  
     }
