@@ -15,9 +15,11 @@ Things to do
 -Add better comments to sorting methods (Collin will do this)
 
 
+- Tried to do efficientClosestPair and bruteClosestPair see if it has any errors (by Rasi to Team)
+
 -Write the efficientClosestPair algorithm in ClosestPair.java
 --should run in theta(n log n) time
---pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"
+--pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"- Rasi is working on this
 
 -Write the bruteClosestPair algorithm in ClosestPair.java
 --should run in theta(n^2) time
