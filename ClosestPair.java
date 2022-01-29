@@ -51,13 +51,14 @@ public class ClosestPair {
     //sort points based on Y value
     sort(points, false);
     ArrayList<Point> sortedPointsY = new ArrayList<Point>(points);
+    //System.out.println(points);
 
     System.out.println("Finished sorting points");
 
 
 		// call efficientClosestPair
-    PointPair closestPair = efficientClosestPair(sortedPointsX, sortedPointsY);
-    System.out.println(closestPair);
+    //PointPair closestPair = efficientClosestPair(sortedPointsX, sortedPointsY);
+    //System.out.println(closestPair);
 
 	}
 
@@ -67,13 +68,10 @@ public class ClosestPair {
 	 * @return Write what it returns 
 	 */
 	public static PointPair efficientClosestPair(ArrayList<Point> pointsXOrdered, ArrayList<Point> pointsYOrdered) {
+    PointPair smallest;
 
-    //if points is empty
-    if(pointsXOrdered.size() == 0){
-      return null;
-    }
     //if points <= 3, use brute force
-    else if (pointsXOrdered.size() <= 3){
+    if (pointsXOrdered.size() <= 3){
       return bruteClosestPair(pointsXOrdered);
     } 
     //efficient closest pair algorithm
@@ -81,31 +79,30 @@ public class ClosestPair {
       //get sizes and create arraylists
       int size = pointsXOrdered.size();
       int halfSize = size / 2;
-      ArrayList<Point> Pl = new ArrayList<Point>();
-      ArrayList<Point> Pr = new ArrayList<Point>();
-      ArrayList<Point> Ql = new ArrayList<Point>();
-      ArrayList<Point> Qr = new ArrayList<Point>();
+      ArrayList<Point> Pl = new ArrayList<Point>(pointsXOrdered.subList(0, halfSize));
+      ArrayList<Point> Pr = new ArrayList<Point>(pointsXOrdered.subList(halfSize, size));
+      ArrayList<Point> Ql = new ArrayList<Point>(pointsYOrdered.subList(0, halfSize));
+      ArrayList<Point> Qr = new ArrayList<Point>(pointsYOrdered.subList(halfSize, size));
 
-      //populate Pl, Pr, Ql, Qr arraylists
-      for(int i = 0; i < halfSize; i++){
-        Pl.add(pointsXOrdered.get(i));
-      }
-      for(int i = halfSize; i < size; i++){
-        Pr.add(pointsXOrdered.get(i));
-      }
-      for(int i = 0; i < halfSize; i++){
-        Ql.add(pointsYOrdered.get(i));
-      }
-      for(int i = halfSize; i < size; i++){
-        Qr.add(pointsYOrdered.get(i));
-      }
-
+      //recursive calls
       PointPair left = efficientClosestPair(Pl,Ql);
       PointPair right = efficientClosestPair(Pr,Qr);
+      
+      //determine smallest of each half
+      if (left.distBetweenPoints() < right.distBetweenPoints()){
+        smallest = left;
+      }
+      else{
+        smallest = right;
+      }
 
+      double midX = pointsXOrdered.get(halfSize - 1).x;
+
+      ArrayList<Point> S = new ArrayList<Point>();      
+      
 		  
     }
-    return null;
+    return smallest;
 	}
 	
 
@@ -115,6 +112,10 @@ public class ClosestPair {
 	 * @return Write what it returns 
 	 */
 	public static PointPair bruteClosestPair(ArrayList<Point> points) {
+    if (points.size() == 0){
+      return null;
+    }
+
 		double shortestDistance = Double.POSITIVE_INFINITY;
 		int pointOneIndex = 0;
     int pointTwoIndex = 0;
@@ -145,20 +146,15 @@ public class ClosestPair {
 	 */
 	public static ArrayList<Point> sort(ArrayList<Point> points, boolean sortX) {
     //create havles of array
-    ArrayList<Point> left = new ArrayList<Point>();
-    ArrayList<Point> right = new ArrayList<Point>();
+    ArrayList<Point> left;
+    ArrayList<Point> right;
     int mid;
 
     if (points.size() > 1){
       mid = points.size() / 2;
 
-      //populate halves
-      for(int i = 0; i < mid; i++){
-        left.add(points.get(i));
-      }
-      for(int j = mid; j < points.size(); j++){
-        right.add(points.get(j));
-      }
+      left = new ArrayList<Point>(points.subList(0, mid));
+      right = new ArrayList<Point>(points.subList(mid, points.size()));
 
       sort(left, sortX);
       sort(right, sortX);
