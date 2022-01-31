@@ -3,7 +3,7 @@ Hello Team,
 I created this file to help keep track of what still needs to be worked on.
 
 
-Things that are done
+Things that are DONE
 =======================
 -Read in points from points.txt
 -Sorting algorithm
@@ -12,15 +12,9 @@ Things that are done
 
 Things to do
 =======================
--Add better comments to sorting methods (Collin will do this)
-
-
-- Tried to do efficientClosestPair and bruteClosestPair see if it has any errors (by Rasi to Team)
-
 -Write the efficientClosestPair algorithm in ClosestPair.java
 --should run in theta(n log n) time
 --pseudo-code is available on BlackBoard under "Notes -> Efficient Closest Pairs"
--- Rasi is working on this
 
 
 -Make sure everything is properly commented according to the JavaDoc sheet on blackboard
